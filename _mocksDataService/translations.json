@@ -1,0 +1,6 @@
+{
+  "page.auth.form.email": "Email",
+  "page.auth.form.password": "Password",
+  "page.auth.form.companyName": "Company Name",
+  "page.auth.form.submitButton": "Submit"
+}

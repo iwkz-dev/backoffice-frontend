@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "Theodore Roosevelt",
+      "sex": "male",
+      "isStared": true
+    },
+    {
+      "id": "2",
+      "name": "Abraham Lincoln",
+      "sex": "male",
+      "isStared": false
+    }
+  ]
+}
