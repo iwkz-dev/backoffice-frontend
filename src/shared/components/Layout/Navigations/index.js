@@ -1,17 +1,21 @@
 import React from 'react';
 
 // components
-import Divider from '@material-ui/core/Divider';
-import AppNavigations from './AppNavigations';
+import DashboardNav from 'Dashboard/routes/nav';
+import FinanceNav from 'Finance/routes/nav';
 
 // styles
-import { ToolbarSection } from './styled.components';
+import { ToolbarSection, CustomList } from './styled.components';
 
 const Navigations = () => (
   <>
     <ToolbarSection />
-    <AppNavigations />
-    <Divider />
+
+    {/* App Navigations */}
+    <CustomList>
+      <DashboardNav />
+      <FinanceNav />
+    </CustomList>
   </>
 );
 
