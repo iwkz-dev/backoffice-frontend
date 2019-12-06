@@ -4,6 +4,7 @@
   "description": "backoffice-iwkz api dashboard client",
   "main": "index.js",
   "scripts": {
+    "build": "./node_modules/.bin/babel-node -- ./node_modules/.bin/webpack --config ./webpack.config.prod.js -p && cp ./public/index.html ./target/index.html && cp ./public/favicon.ico ./target/favicon.ico && cp prod.config.json ./target/config.json",
     "start": "cp config.json ./public/config.json && babel-node --max_old_space_size=3072 -- ./node_modules/.bin/webpack-dev-server --config ./webpack.config.dev.js --progress --colors",
     "test": "./node_modules/.bin/jest --config jest.config.json",
     "eslint:fix": "./node_modules/.bin/eslint --fix",
