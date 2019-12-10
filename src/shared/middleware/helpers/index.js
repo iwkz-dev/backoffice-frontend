@@ -12,7 +12,7 @@ import {
 } from '../constants';
 
 export async function callAPI({
-  apiRoot, endpoint, method, params, multipart, download, authToken,
+  apiRoot, endpoint, method, params, multipart, download = false, authToken,
 }) {
   try {
     let absolute = false;
@@ -77,7 +77,11 @@ export async function callAPI({
     if (download) {
       body = { ...body, blob: await response.blob() };
     } else if (response.status !== NO_CONTENT) {
-      body = await response.json();
+      try {
+        body = await response.json();
+      } catch (jsonError) {
+        // keep the default body if endpoint returns no data for other status than 204
+      }
     }
 
     return {
