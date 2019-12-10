@@ -13,6 +13,7 @@ import {
 } from 'lodash';
 import { createError } from 'shared/utils/actions/errorActions';
 import { METHOD_GET } from 'shared/constants/httpMethod';
+import { getAuthToken } from 'shared/middleware/webStorage/helpers';
 import {
   callAPI,
   phraseErrorsAsSingleMessage,
@@ -199,6 +200,7 @@ export default ({ actionKey, apiRoot }) => (store) => (next) => async (action) =
   }
 
   try {
+    const authToken = getAuthToken();
     const response = await callAPI({
       apiRoot: await apiRoot(),
       endpoint: endpoint.path,
@@ -206,7 +208,7 @@ export default ({ actionKey, apiRoot }) => (store) => (next) => async (action) =
       params,
       multipart,
       download,
-      authToken: store.getState().auth ? store.getState().auth.token : null,
+      authToken,
     });
 
     if (response.statusCode === 200 || response.statusCode === 202 || response.statusCode === 204) {
@@ -219,7 +221,7 @@ export default ({ actionKey, apiRoot }) => (store) => (next) => async (action) =
           endpoint: endpoint.path + pollId,
           method: METHOD_GET,
           params: {},
-          authToken: store.getState().auth ? store.getState().auth.token : null,
+          authToken,
         });
 
         if (pollResponse.statusCode >= 400) {

@@ -12,6 +12,7 @@ import {
 } from 'lodash';
 import { createError } from 'shared/utils/actions/errorActions';
 import { METHOD_POST, METHOD_PATCH, METHOD_PUT } from 'shared/constants/httpMethod';
+import { getAuthToken } from 'shared/middleware/webStorage/helpers';
 import {
   callAPI,
   normalizeErrorsFromBody,
@@ -154,6 +155,8 @@ export default ({ actionKey, apiRoot }) => (store) => (next) => async (action) =
   }
 
   try {
+    const authToken = getAuthToken();
+
     const response = await callAPI({
       apiRoot: await apiRoot(),
       endpoint: endpoint.path,
@@ -161,7 +164,7 @@ export default ({ actionKey, apiRoot }) => (store) => (next) => async (action) =
       params,
       multipart,
       download,
-      authToken: store.getState().auth ? store.getState().auth.token : null,
+      authToken,
     });
     if (response.statusCode >= 400) {
       return dispatchError(response);
