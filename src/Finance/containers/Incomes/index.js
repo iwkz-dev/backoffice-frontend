@@ -103,6 +103,7 @@ class Incomes extends Component {
   }
 
   onEditIncome = (newIncome) => {
+    const { updateIncome } = this.props;
     const {
       income: { id },
       amount,
@@ -110,7 +111,7 @@ class Incomes extends Component {
       info,
     } = newIncome;
 
-    this.props.updateIncome({
+    updateIncome({
       id,
       data: {
         incomeTypeId: incomeType,
@@ -124,8 +125,9 @@ class Incomes extends Component {
 
   onDeleteIncome = ({ income }) => {
     const { id } = income;
+    const { removeIncome } = this.props;
 
-    this.props.removeIncome({ id });
+    removeIncome({ id });
 
     this.setState({ selectedIncomeId: id });
   }
@@ -195,6 +197,7 @@ class Incomes extends Component {
           data={this.data}
           loading={this.isLoading}
 
+          typeDataField="incomeType"
           typeData={this.typesData}
 
           onAdd={this.onAddNewIncome}

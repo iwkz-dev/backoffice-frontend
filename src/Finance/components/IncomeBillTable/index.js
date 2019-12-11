@@ -11,6 +11,7 @@ const IncomeBillTable = ({
   data,
   loading,
 
+  typeDataField,
   typeData,
 
   onAdd,
@@ -20,9 +21,18 @@ const IncomeBillTable = ({
   const columns = [
     { title: 'Tanggal Input', field: 'createdAt', editable: 'never' },
     { title: 'Jumlah', field: 'amount', type: 'numeric' },
-    { title: `Tipe ${title}`, field: 'incomeType', lookup: typeData, initialEditValue: 1 },
-    { title: 'Keterangan', field: 'info' },
+    { title: `Tipe ${title}`, field: typeDataField, lookup: typeData, initialEditValue: 1 },
+    { title: 'Keterangan', field: 'info', type: 'text' },
   ];
+
+  const pageSizeOptions = () => {
+    const options = [5];
+
+    if ((5 % data.length) === 5) options.push(10);
+    if ((10 % data.length) === 10) options.push(data.length);
+
+    return options;
+  };
 
   return (
     <LoadingOverlay loading={loading}>
@@ -33,6 +43,7 @@ const IncomeBillTable = ({
         options={{
           actionsColumnIndex: columns.length,
           exportButton: true,
+          pageSizeOptions: pageSizeOptions(),
         }}
 
         editable={{
@@ -65,6 +76,7 @@ IncomeBillTable.propTypes = {
   data: PropTypes.array,
   loading: PropTypes.bool,
 
+  typeDataField: PropTypes.string,
   typeData: PropTypes.shape(),
 
   onAdd: PropTypes.func,
@@ -77,6 +89,7 @@ IncomeBillTable.defaultProps = {
   data: [],
   loading: null,
 
+  typeDataField: null,
   typeData: {},
 
   onAdd: null,
