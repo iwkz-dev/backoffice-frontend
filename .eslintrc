@@ -27,6 +27,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "consistent-return": "off",
     "no-param-reassign": "off",
+    "no-shadow": "off",
     "import/extensions": "off",
     "react/jsx-filename-extension": "off",
     "react/forbid-prop-types": "off",
