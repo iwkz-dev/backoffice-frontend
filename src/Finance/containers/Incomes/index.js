@@ -92,8 +92,8 @@ class Incomes extends Component {
     const { month, year } = this.state;
 
     const data = {
-      month,
-      year,
+      month: parseInt(month),
+      year: parseInt(year),
       incomeTypeId: incomeType,
       amount,
       info,

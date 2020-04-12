@@ -9,8 +9,8 @@ import { LoginFormSection, FormStyled, ButtonStyled } from './styled.components'
 
 const LoginForm = ({ onClickLogin }) => {
   const [loginValues, setLoginValues] = useState({
-    username: 'iwkz',
-    password: '1WK2.de!!!',
+    username: '',
+    password: '',
   });
 
   const onTextFieldChange = (name) => (event) => {
